@@ -178,6 +178,54 @@ img, svg { max-width:100%; height:auto; }
 @keyframes ambientGlow { 0%,100%{opacity:.30;filter:blur(18px)} 50%{opacity:.42;filter:blur(21px)} }
 @keyframes ambientPulse { 0%,100%{opacity:.94} 50%{opacity:1} }
 @keyframes todayBreathe { 0%,100%{box-shadow:0 0 13px rgba(180,160,220,.14)} 50%{box-shadow:0 0 18px rgba(180,160,220,.22)} }
+
+
+/* SharePoint/Notion embed height fix:
+   Keeps the widget pinned to its natural content height when the iframe/web part is dragged taller. */
+html,
+body,
+#root {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+body {
+  display: block !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+#root,
+.app-shell,
+.widget-stack {
+  height: auto !important;
+  min-height: 0 !important;
+  align-content: flex-start !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+}
+
+.app-shell {
+  display: block !important;
+}
+
+.widget-stack {
+  margin: 0 auto 0 0;
+  flex: 0 0 auto !important;
+  gap: 8px !important;
+}
+
+.card {
+  flex: 0 0 auto !important;
+}
+
+/* Optional: if SharePoint gives the iframe extra blank height, this makes the blank area transparent rather than looking like a spaced-out widget. */
+html,
+body {
+  background: transparent !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card::before,.card::after,.time-card,.weather-card,.astro-card,.calendar-card,.weather-icon-wrap,.weather-icon-img,.astro-orb { animation:none; }
 }
